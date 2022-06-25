@@ -1,0 +1,7 @@
+.tetris{
+    display: flex;
+}
+.three{
+    width: 33.3vw;
+    height: 100vh;
+}
