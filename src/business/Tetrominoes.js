@@ -73,8 +73,9 @@ export const rotate = ({ piece, direction }) => {
   );
 
   // Reverse rows to get a rotated matrix
+  // console.log(newPiece);
+  // console.log(newPiece.map((row) => row.reverse()));
   if (direction > 0) return newPiece.map((row) => row.reverse());
-
   return newPiece.reverse();
 };
 

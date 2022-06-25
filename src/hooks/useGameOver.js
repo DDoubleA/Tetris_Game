@@ -1,7 +1,7 @@
 import {useCallback, useState} from "react";
 
 export const useGameOver = ()=> {
-    const [gameOver, setGameOver] = useState(true);
+    const [gameOver, setGameOver] = useState(false);
 
     const resetGameOver = useCallback(() => {
         setGameOver(false);

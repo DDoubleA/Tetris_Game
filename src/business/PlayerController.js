@@ -2,30 +2,6 @@ import { hasCollision, isWithinBoard } from "./Board";
 import { rotate } from "./Tetrominoes";
 import { Action } from "./Input";
 
-const attemptRotation = ({ board, player, setPlayer }) => {
-    const shape = rotate({
-        piece: player.tetromino.shape,
-        direction: 1
-    });
-
-    const position = player.position;
-    const isValidRotation =
-        isWithinBoard({ board, position, shape }) &&
-        !hasCollision({ board, position, shape });
-
-    if (isValidRotation) {
-        setPlayer({
-            ...player,
-            tetromino: {
-            ...player.tetromino,
-            shape
-            }
-        });
-        } else {
-        return false;
-        }
-
-}
 
 export const movePlayer = ({ delta, position, shape, board }) => {
   const desiredNextPosition = {
@@ -53,6 +29,61 @@ export const movePlayer = ({ delta, position, shape, board }) => {
 
   return { collided: isHit, nextPosition };
 };
+
+const attemptRotation = ({ board, player, setPlayer }) => {
+    const shape = rotate({
+        piece: player.tetromino.shape,
+        direction: 1
+    });
+
+    const position = player.position;
+    const isValidRotation =
+        isWithinBoard({ board, position, shape }) &&
+        !hasCollision({ board, position, shape });
+
+    if (isValidRotation) {
+      setPlayer({
+          ...player,
+          tetromino: {
+          ...player.tetromino,
+          shape
+          }
+      });
+    } 
+    else if(player.position.column <= -1){
+      position.column = 0;
+      console.log(position);
+      const isValidRotation =
+        isWithinBoard({ board, position, shape }) &&
+        !hasCollision({ board, position, shape });
+      if (isValidRotation) {
+        setPlayer({
+            ...player,
+            tetromino: {
+            ...player.tetromino,
+            shape
+            }
+        });
+    }}
+    else if(player.position.column >= 7){
+      position.column = 10 - player.tetromino.shape.length;
+      const isValidRotation =
+        isWithinBoard({ board, position, shape }) &&
+        !hasCollision({ board, position, shape });
+      if (isValidRotation) {
+        setPlayer({
+            ...player,
+            tetromino: {
+            ...player.tetromino,
+            shape
+            }
+        });
+    }}
+    else{
+      return false;
+    }
+
+}
 
 
 const attemptMovement = ({ board, action, player, setPlayer, setGameOver }) => {
@@ -105,4 +136,3 @@ export const playerController = ({
       attemptMovement({board, player, setPlayer, action, setGameOver})
     }
   };
-  
