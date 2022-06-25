@@ -1,4 +1,4 @@
-import Board from "../components/Game/Board";
+import Board from "../components/Board/Board";
 import {Cell} from "./Cell"
 import {transferToBoard} from "./Tetrominoes"
 import { movePlayer } from "./PlayerController";
@@ -36,7 +36,7 @@ const findDropPosition = ({ board, position, shape }) => {
 };
 
 
-export const nextBoard = ({board, player, resetPlayer, addLinesCleared}) => {
+export const nextBoard = ({board, player, resetPlayer, addLinesCleared,gameOver}) => {
   const {tetromino, position } = player;
 
   let rows = board.rows.map((row) =>
@@ -89,6 +89,8 @@ export const nextBoard = ({board, player, resetPlayer, addLinesCleared}) => {
   }
 
   if(player.collided || player.isFastDropping){
+    // console.log("in build/Board", gameOver);
+    if(!gameOver)
     resetPlayer();
   }
   

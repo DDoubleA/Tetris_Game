@@ -7,20 +7,22 @@ export const useBoard = ({
     columns,
     player,
     resetPlayer,
-    addLinesCleared
+    addLinesCleared,
+    gameOver
   }) => {
     const [board, setBoard] = useState(buildBoard({ rows, columns }));
-  
+    // console.log("in useBoard", gameOver);
     useEffect(() => {
       setBoard((previousBoard) =>
         nextBoard({
           board: previousBoard,
           player,
           resetPlayer,
-          addLinesCleared
+          addLinesCleared,
+          gameOver
         })
       );
-    }, [player, resetPlayer, addLinesCleared]);
+    }, [player, resetPlayer, addLinesCleared,gameOver]);
   
     return [board];
   };

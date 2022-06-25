@@ -1,29 +1,39 @@
 import "./Tetris.css";
-// import Game from "../Game/Game";
-import Board from "../Game/Board";
+import Board from "../Board/Board";
 import GameStats from "../GameStats"
 import Previews from "../Previews"
 import GameController from "../GameController";
+import GameOver from "../GameOver";
 
 import {useBoard} from "../../hooks/useBoard"
 import {useGameOver} from "../../hooks/useGameOver"
 import {useGameStats} from "../../hooks/useGameStats"
 import {usePlayer} from "../../hooks/usePlayer"
 
+import { useNavigate } from "react-router-dom";
+
 function Tetris({rows, columns}){
     const [gameOver, setGameOver, resetGameOver] = useGameOver();
     const [gameStats, addLinesCleared] = useGameStats();
     const [player, setPlayer, resetPlayer] = usePlayer();
-    const [board, setBoard] = useBoard({rows, columns,player,resetPlayer,addLinesCleared});
-  
+    const [board, setBoard] = useBoard({rows, columns,player,resetPlayer,addLinesCleared,gameOver});
+
+    const navigate = useNavigate();
+
     // const player = {tetrominoes : [] }
     // // const start = () => resetGameOver();
-    if(gameOver){
-        window.alert("GameOVer")
-    }
+    // if(gameOver){
+    //     window.alert("GameOVer")
+    // }
+
+    const closeModal = () => {
+        resetGameOver();
+        navigate("/")
+      };
 
     return (
     <div className = "tetris">
+        <GameOver open={gameOver} close={closeModal} header="Modal heading"></GameOver>
         <div className="three">
 
         </div>

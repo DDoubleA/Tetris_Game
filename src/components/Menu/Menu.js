@@ -5,8 +5,6 @@ function Menu ({onClick}){
     const navigate = useNavigate();
 
     return (
-
-
     <div className="Menu">
         <div>
             <button className = "Button" onClick = {() => navigate("/tetris")}>
