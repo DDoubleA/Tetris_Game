@@ -7,11 +7,13 @@ const speedIncrement = 50;
 export const useDropTime = ({ gameStats }) => {
   const [dropTime, setDropTime] = useState(defaultDropTime);
   const [previousDropTime, setPreviousDropTime] = useState();
+  // console.log("droptime",dropTime);
 
   const resumeDropTime = useCallback(() => {
     if (!previousDropTime) {
       return;
     }
+    console.log("remume");
     setDropTime(previousDropTime);
     setPreviousDropTime(null);
   }, [previousDropTime]);

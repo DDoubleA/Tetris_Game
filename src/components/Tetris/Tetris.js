@@ -33,7 +33,7 @@ function Tetris({rows, columns}){
 
     return (
     <div className = "tetris">
-        <GameOver open={gameOver} close={closeModal} header="Modal heading"></GameOver>
+        <GameOver open={gameOver} close={closeModal} gameStats={gameStats}></GameOver>
         <div className="three">
 
         </div>
